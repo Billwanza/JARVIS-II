@@ -1,5 +1,4 @@
 fastapi
-uvicorn[standard]
+uvicorn
 openai
-psycopg[binary]
 pydantic
