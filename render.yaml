@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: personal-jarvis
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: JARVIS_PASSWORD
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: personal-jarvis-db
+          property: connectionString
+      - key: OPENAI_MODEL
+        value: gpt-4o-mini
+
+databases:
+  - name: personal-jarvis-db
+    databaseName: jarvis
+    user: jarvis_user
