@@ -10,7 +10,7 @@ from pydantic import BaseModel, Field
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DATABASE_URL = os.getenv("DATABASE_URL", "")
-PASSWORD = os.getenv("JARVIS_PASSWORD", "")
+PASSWORD = os.getenv("JARVIS_PASSWORD"1234"")
 client = OpenAI(api_key=os.environ["OPENAI_API_KEY"]) if os.getenv("OPENAI_API_KEY") else None
 
 app = FastAPI(title="Personal Jarvis")
