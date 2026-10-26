@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>J.A.R.V.I.S.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;800&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="top">
+  <h1>J.A.R.V.I.S.</h1>
+  <div class="top-right">
+    <span id="clock" aria-label="Local time"></span>
+    <span class="pill" id="statusPill" data-state="idle"><i></i><b id="statusText">Standby</b></span>
+  </div>
+</header>
+
+<div id="notice" class="notice" hidden></div>
+
+<main class="grid">
+  <section class="panel stage" aria-label="Voice control">
+    <div class="orb" id="orb" data-state="idle" aria-hidden="true">
+      <i class="ring r1"></i><i class="ring r2"></i><i class="ring r3"></i><i class="core"></i>
+    </div>
+    <p class="caption" id="caption">Ready when you are.</p>
+    <div class="controls">
+      <button id="micBtn" class="mic" type="button" aria-pressed="false">Talk</button>
+      <button id="stopBtn" class="ghost" type="button">Stop speaking</button>
+    </div>
+    <label class="switch"><input type="checkbox" id="speakToggle" checked><span>Speak replies aloud</span></label>
+    <p class="hint" id="voiceHint" hidden></p>
+  </section>
+
+  <section class="panel chat" aria-label="Conversation">
+    <div class="chat-head"><h2>Conversation</h2><button id="clearBtn" class="ghost small" type="button">Clear conversation</button></div>
+    <div class="log" id="log" role="log" aria-live="polite"></div>
+    <form id="chatForm" autocomplete="off">
+      <input id="chatInput" type="text" placeholder="Type a message, or press Talk" aria-label="Message">
+      <button type="submit" class="send">Send</button>
+    </form>
+  </section>
+
+  <aside class="panel memory" aria-label="Saved memories">
+    <h2>Saved memories</h2>
+    <ul id="memList" class="mem-list"></ul>
+    <form id="memForm" autocomplete="off">
+      <input id="memInput" type="text" placeholder="Add something for Jarvis to remember" aria-label="New memory">
+      <button type="submit" class="send">Save</button>
+    </form>
+  </aside>
+</main>
+
+<div id="lock" class="lock" hidden>
+  <form id="lockForm" class="panel">
+    <h2>Jarvis is locked</h2>
+    <p id="lockMsg">Enter your Jarvis password.</p>
+    <input id="lockInput" type="password" autocomplete="current-password" aria-label="Jarvis password">
+    <button type="submit" class="send">Unlock</button>
+  </form>
+</div>
+
+<script src="/static/config.js"></script>
+<script src="/static/app.js"></script>
+</body>
+</html>
