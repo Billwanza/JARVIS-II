@@ -1,0 +1,8 @@
+const res = await fetch("https://your-service-name.onrender.com/chat", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ message: input.value })
+});
+
+const data = await res.json();
+console.log(data.reply);
