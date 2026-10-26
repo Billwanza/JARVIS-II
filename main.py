@@ -5,13 +5,13 @@ from psycopg.rows import dict_row
 from fastapi import FastAPI, Header, HTTPException
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
-from openai import OpenAI
+from tinyfish import tinyfish
 from pydantic import BaseModel, Field
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 DATABASE_URL = os.getenv("DATABASE_URL", "")
 PASSWORD = os.getenv("JARVIS_PASSWORD", "")
-client = OpenAI(api_key=os.environ["OPENAI_API_KEY"]) if os.getenv("OPENAI_API_KEY") else None
+client = TinyFish(api_key=os.environ["TINYFISH_API_KEY"]) if os.getenv("TINYFISH_API_KEY") else None
 
 app = FastAPI(title="Personal Jarvis")
 app.mount("/static", StaticFiles(directory=os.path.join(ROOT, "static")), name="static")
@@ -59,7 +59,7 @@ def status(x_jarvis_password: Optional[str] = Header(default=None)):
 def chat(req: ChatRequest, x_jarvis_password: Optional[str] = Header(default=None)):
     auth(x_jarvis_password)
     if client is None:
-        raise HTTPException(503, "Set OPENAI_API_KEY in Render environment settings.")
+        raise HTTPException(503, "Set TINYFISH_API_KEY in Render environment settings.")
     if not DATABASE_URL:
         raise HTTPException(503, "Configure a Render PostgreSQL database and DATABASE_URL.")
     try:
